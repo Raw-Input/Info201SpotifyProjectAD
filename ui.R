@@ -11,10 +11,10 @@ my.ui <- fluidPage(
     ),
     sidebarPanel(
       selectInput("select1", label = h3("Compare..."), 
-                  choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo"), 
+                  choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo", "Duration_ms"), 
                   selected = "Energy"),
       selectInput("select2", label = h3("With..."), 
-                  choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo"), 
+                  choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo", "Duration_ms"), 
                   selected = "Loudness")
     )
   )
