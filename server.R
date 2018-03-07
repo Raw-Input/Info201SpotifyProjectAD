@@ -14,7 +14,7 @@ my.server <- function (input, output) {
              geom_point(mapping = aes_string(x = choice, y = choice.2, col = big.frame$Position)) + scale_colour_gradient(low = "pink", high = "black") +
              geom_smooth(mapping = aes_string(x = choice, y = choice.2), method ="loess", se=F) + 
              labs(title = paste(input$select1, "vs.", input$select2), subtitle = "In Spotfy's Top 100 Tracks", x=input$select1, y=input$select2, col = "Top 100 Rank (lighter is more popular)"))
-    })
+  })
   
   # Creating tooltip hover for plot
   output$hover_info <- renderUI({
@@ -48,7 +48,17 @@ my.server <- function (input, output) {
     )
   })
   
+  output$plot2 <- renderPlot({
+    
+    return(ggplot(data = music.averages) + geom_col(mapping = aes_string(x = "genre", y = tolower(input$select3), fill = "genre"))
+           + labs(title = paste("Average", input$select3, "for Each Genre")))
+  })
+  output$plot3 <- renderPlot({
+    
+    return(ggplot(data = audio.features) + geom_point(mapping = aes_string(x = "genre", y = tolower(input$select3), color = "genre"), size = 5) 
+           + labs(title = paste("Specific Values of", input$select3, "for Each Genre")))
+  })
+  
 }
-
 
 shinyServer(my.server)
