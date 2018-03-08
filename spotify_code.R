@@ -78,7 +78,7 @@ for(row in 1:125) { #use nrow(top) for all songs in the csv
   track <- data.frame(fromJSON(track.body)) %>% mutate(genre =  final.music.dataframe[row, 2])
   audio.features <- rbind(audio.features, track, stringsAsFactors = FALSE)
 }
-
+write.csv(audio.features, file = "audio_features.csv")
 music.averages <- data.frame()
 for(row in 1:5){
   

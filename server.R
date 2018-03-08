@@ -12,6 +12,7 @@ if(file.exists("big_table.csv") == FALSE) {
   music.averages <- read.csv("music_averages.csv", stringsAsFactors = FALSE)
   high.avg <- read.csv("high_avg.csv", stringsAsFactors = FALSE)
   low.avg <- read.csv("low_avg.csv", stringsAsFactors = FALSE)
+  audio.features <- read.csv("audio_features.csv", stringsAsFactors =  FALSE)
 }
 
 #Creating plot
