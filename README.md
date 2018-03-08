@@ -38,3 +38,8 @@ Using these charts, we were able to determine a number of interesting correlatio
 # Part 3: Audio Features vs. Valence
 
 All songs have a certain Valence, or positivity, associated with them. Songs with a high valence are more positive, while songs with a low valence value tend to be more negative and depressing. In this project, the top 100 most popular tracks on Spotify were selected and sorted by valence. Songs with a high valence (>0.75) and low valence (<0.25) were considered in this data and were used to find trends between the valence of a track and several specific audio features. The data for both groups is then displayed side by side in order to show not only the relationship between valence and these features, but how those relationships compare with songs on the opposite end of the valence spectrum. This data can be useful for users who tend to listen to music that has a high or low valence by informing them of what impact that will have on the music they listen to. In the app many of these relationships are explained following the visual representation of the data.
+
+
+# NOTE
+
+In order for our code to work with shinyapps.io and without giving up our spotify developer keys, the repository for our project contains csv files that we obtained using the API. However to view the code that produced those files one can look at spotify_code.R
