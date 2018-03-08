@@ -1,8 +1,17 @@
 library("shiny")
+library("httr")
+library("jsonlite")
+library("dplyr")
+library("ggplot2")
 theme_set(theme_bw())
 options(scipen = 999)
 if(file.exists("big_table.csv") == FALSE) {
   source("spotify_code.R")
+} else {
+  big.frame <- read.csv("big_table.csv", stringsAsFactors = FALSE)
+  music.averages <- read.csv("music_averages.csv", stringsAsFactors = FALSE)
+  high.avg <- read.csv("high_avg.csv", stringsAsFactors = FALSE)
+  low.avg <- read.csv("low_avg.csv", stringsAsFactors = FALSE)
 }
 
 #Creating plot
@@ -60,10 +69,10 @@ my.server <- function (input, output) {
   })
   #liam server code
   #Valence Data Bar Graph
-  output$plot2 <- renderPlot({
-    option <- tolower(input$select)
+  output$plot4 <- renderPlot({
+    option <- tolower(input$select4)
     return(ggplot()+
-             geom_bar(data=high.avg,mapping =  aes(x=option), color='blue') +
+             geom_bar(data=high.avg, mapping =  aes(x=option), color='blue') +
              geom_bar(data=low.avg, mapping = aes(x=option),color='green')
            
     )

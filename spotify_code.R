@@ -102,6 +102,7 @@ for(row in 1:5){
               liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = temp.genre)
   
   music.averages <- rbind(music.averages, temp.averages, stringsAsFactors = FALSE)
+  write.csv(music.averages, file = "music_averages.csv")
 }
 #Valence Data Trends
 
@@ -115,4 +116,5 @@ high.valence <- filter(big.frame, valence >0.75)
 low.valence <- filter(big.frame, valence <0.25)
 high.avg <- summarize(high.valence,danceability=mean(danceability), energy=mean(energy), loudness=mean(loudness), speechiness=mean(speechiness), acousticness=mean(acousticness), instrumentalness=mean(instrumentalness), liveness=mean(liveness),tempo=mean(tempo), duration=mean(duration_ms))
 low.avg <- summarize(low.valence,danceability=mean(danceability), energy=mean(energy), loudness=mean(loudness), speechiness=mean(speechiness), acousticness=mean(acousticness), instrumentalness=mean(instrumentalness), liveness=mean(liveness),tempo=mean(tempo), duration=mean(duration_ms))
-
+write.csv(high.avg, file = "high_avg.csv")
+write.csv(low.avg, file = "low_avg.csv")

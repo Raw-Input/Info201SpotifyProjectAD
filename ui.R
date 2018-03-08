@@ -37,11 +37,13 @@ my.ui <- fluidPage(
   titlePanel("Audio Features vs Valence"),
   sidebarLayout( 
     mainPanel(
-      plotOutput('plot2')
+      div(
+        plotOutput('plot4')
+      )
     ),
     sidebarPanel(
       #the options on what to compare, "valence" vs "whatever characteristic"
-      selectInput("select", label = h3("Characteristic"), 
+      selectInput("select4", label = h3("Characteristic"), 
                   choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Tempo", "Duration")
       )
     )
