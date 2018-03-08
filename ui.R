@@ -25,7 +25,9 @@ my.ui <- fluidPage(
       div(
         plotOutput('plot2'),
         plotOutput('plot3')
-      )
+      ),
+    h1("Audio Features By Genre Analysis:"),
+    textOutput('section2analysis')
     ),
     sidebarPanel(
       selectInput("select3", label = h3("Audio Feature"), 
@@ -48,7 +50,6 @@ my.ui <- fluidPage(
       )
     )
   )
-  
 )
 
 shinyUI(my.ui)

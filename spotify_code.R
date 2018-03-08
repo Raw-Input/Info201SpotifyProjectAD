@@ -19,7 +19,7 @@ for(row in 1:100) { #use nrow(top) for all songs in the csv
   music <- GET (paste0("https://api.spotify.com/v1/audio-features/", stripName(top[row, "URL"])), add_headers(Authorization = paste("Bearer", access_token)))
   body.2 <- content(music, "text") 
   parsed.song.2 <- fromJSON(body.2) 
-  print(parsed.song.2)
+  #print(parsed.song.2)
   audio.features.all <- rbind(audio.features.all, parsed.song.2, stringsAsFactors = FALSE)
 }
 new.top <- slice(new.top, 1:100)

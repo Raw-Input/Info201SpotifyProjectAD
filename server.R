@@ -67,6 +67,32 @@ my.server <- function (input, output) {
     return(ggplot(data = audio.features) + geom_point(mapping = aes_string(x = "genre", y = tolower(input$select3), color = "genre"), size = 5) 
            + labs(title = paste("Specific Values of", input$select3, "for Each Genre")))
   })
+  output$section2analysis <- renderText({
+    
+    selection <- input$select3
+    if(selection == "Danceability"){
+      return("Rap had the highest average danceability rating of the genres tested. All other genres had similar scores to that of rap, except classical, which, as expected, had a very low average danceability rating.")
+    }else if(selection == "Energy"){
+      return("Rock had the highest average energy rating of the genres tested. All other genres had similar scores to that of rock, except classical, which had a very low average energy rating.")
+    }else if(selection == "Loudness"){
+      return("Classical had the lowest average loudness rating of the tested genres, being well below the other tested genres.")
+    }else if(selection == "Speechiness"){
+      return("Rap clearly had the highest average speechiness rating of the tested genres, which was expected due to the nature of rap music.")
+    }else if(selection == "Acousticness"){
+      return("As the majority of classical music is acoustic, and the majority of the other genres are not, it makes sense that classical is the only genre with an average acoustic rating close to 1.")
+    }else if(selection == "Instrumentalness"){
+      return("As the majority of classical music contains no words, and the majority of the other genres do contain words, it makes sense that classical is the only genre with an average instrumentalness rating close to 1.")
+    }else if(selection == "Liveness"){
+      return("Rap had the highest average liveness rating of the genres tested. All other genres had similar scores to that of rap.")
+    }else if(selection == "Valence"){
+      return("Country had the highest average valence of the genres tested. All other genres had similar scores to that of country, except classical, which had a very low average valence.")
+    }else if(selection == "Tempo"){
+      return("Average tempo was the closest of all the audio features. Rock was barely ahead of the other genres.")
+    }else{
+      return("Classical music had the longest average duration, and the rest of the genres had similar ratings.")
+    }
+
+  })
   #liam server code
   #Valence Data Bar Graph
   output$plot4 <- renderPlot({
