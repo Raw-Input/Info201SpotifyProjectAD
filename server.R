@@ -98,11 +98,12 @@ my.server <- function (input, output) {
   #Valence Data Bar Graph
   output$plot4 <- renderPlot({
     option <- tolower(input$select4)
-    return(ggplot()+
-             geom_bar(data=high.avg, mapping =  aes(x=option), color='blue') +
-             geom_bar(data=low.avg, mapping = aes(x=option),color='green')
-           
-    )
+    averages <- rbind(high.avg, low.avg)
+    rownames(averages) <- c("high_average", "low_average")
+    return(
+      ggplot(data = averages, aes(x = rownames(averages), y = eval(parse(text=option)))) +
+      geom_bar(stat = "identity", fill="steelblue") + labs(y = toString(option))
+      )
   })
   
   
