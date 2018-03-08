@@ -9,7 +9,7 @@ Spotify has several audio features that it calculates for each track in its data
 **Discrete**
 
 - *Duration_ms* - The duration of the track in milliseconds.
-- *Loudness* - The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. 
+- *Loudness* - The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks.
 - *Tempo* - The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.
 
 **Algorithmic**
@@ -24,9 +24,12 @@ Spotify has several audio features that it calculates for each track in its data
 
 # Part 1: Spotify Top 100 Trends
 
-Finding relationships in popular music can help artists and music industry professionals better cater to their audiences. These relationships can also tell us a lot about our music culture as a whole. For this part we took the top 100 most played songs on Spotify from Feburary 24th and analyzed their audio features. Since Spotify's API does not have a specific endpoint for finding the top 100 tracks, we used a third party website (https://spotifycharts.com) to download the top 100 as a csv file which we could then load into R and call various things using the Spotify API. We were able to produce an interactive scatterplot graph where you can change the x and y axis to represent an audio feature. The graph included a trend line to show how these audio features correlated with each other within the top 100. The color of the dots in the scatterplot corresponded to how high up the chart each individual song was, with lighter colors indicating the song was more popular. By hovering over a dot on the plot, users could see the name of the song, the artists, the rank it had on Spotify, and the values of the audio features that had been selected. 
+Finding relationships in popular music can help artists and music industry professionals better cater to their audiences. These relationships can also tell us a lot about our music culture as a whole. For this part we took the top 100 most played songs on Spotify from Feburary 24th and analyzed their audio features. Since Spotify's API does not have a specific endpoint for finding the top 100 tracks, we used a third party website (https://spotifycharts.com) to download the top 100 as a csv file which we could then load into R and call various things using the Spotify API. We were able to produce an interactive scatterplot graph where you can change the x and y axis to represent an audio feature. The graph included a trend line to show how these audio features correlated with each other within the top 100. The color of the dots in the scatterplot corresponded to how high up the chart each individual song was, with lighter colors indicating the song was more popular. By hovering over a dot on the plot, users could see the name of the song, the artists, the rank it had on Spotify, and the values of the audio features that had been selected.
 
 Using these graphs, we were able to determine a number of interesting correlations within top 100 music. We detailed some of them within the app.
 
+# Part 2: Audio Features By Genre
 
-	
+The possibilities for how music can sound are endless, however many of the millions of songs available on Spotify will have a similar style. The different styles of music are what we call genres. Sticking to a specific genre can be beneficial to members of the music industry as it can help them better suit their music to a specific audience. Therefore, knowing the trends of the values of different audio features of different genres would be beneficial as it would help one know if their music statistically fits into a genre. For this part of the project we selected five common genres and, using the Spotify API, gathered data on popular songs from those genres so that this data could be compared and trends between genres could be seen. We were able to produce a bar graph, which displays the average value of the selected audio feature for each genre, and a point plot, which displayed the individual values gathered. These charts also included interactivity for the user as the user is able to select which audio feature they would like to see the data for, and then both charts change to display the correct data.
+
+Using these charts, we were able to determine a number of interesting correlations within the samples from each genre. We detailed some of them within the app. Within the app the analysis on the discovered patterns changes based on the selected audio feature. 
