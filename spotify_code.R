@@ -44,7 +44,7 @@ uri.base <- "https://api.spotify.com/v1/users/"
 #spotify:user:spotify:playlist:37i9dQZF1DX6aTaZa0K6VA    pop
 #spotify:user:spotify:playlist:37i9dQZF1DWWEJlAGA9gs0    classical
 
-playlist.ids <- list("37i9dQZF1DX0XUsuxWHRQd", "37i9dQZF1DX1lVhptIYRda", "37i9dQZF1DXcF6B6QPhFDv", "37i9dQZF1DX6aTaZa0K6VA", "37i9dQZF1DWWEJlAGA9gs0")
+playlist.ids <- list("37i9dQZF1DWWEJlAGA9gs0", "37i9dQZF1DX1lVhptIYRda", "37i9dQZF1DX6aTaZa0K6VA", "37i9dQZF1DX0XUsuxWHRQd", "37i9dQZF1DXcF6B6QPhFDv")
 
 final.music.dataframe <- data.frame()
 
@@ -56,55 +56,50 @@ for(row in 1:5){
   music.uris <- select(music.data[1:25,1], uri)[1:25,1]
   music.uris <- gsub("spotify:track:", "", music.uris)
   if(row == 1){
-    music.dataframe <- data.frame(music.uris, "rap")
+    music.dataframe <- data.frame(music.uris, "classical")
   }else if(row == 2){
     music.dataframe <- data.frame(music.uris, "country")
   }else if(row == 3){
-    music.dataframe <- data.frame(music.uris, "rock")
-  }else if(row == 4){
     music.dataframe <- data.frame(music.uris, "pop")
+  }else if(row == 4){
+    music.dataframe <- data.frame(music.uris, "rap")
   }else{
-    music.dataframe <- data.frame(music.uris, "classical")
+    music.dataframe <- data.frame(music.uris, "rock")
   }
   colnames(music.dataframe)[1] <- "uri" 
   colnames(music.dataframe)[2] <- "genre" 
-  final.music.dataframe <- rbind(final.music.dataframe, music.dataframes)
+  final.music.dataframe <- rbind(final.music.dataframe, music.dataframe)
 }
 
 audio.features <- data.frame()
 for(row in 1:125) { #use nrow(top) for all songs in the csv
   track.data <- GET (paste0("https://api.spotify.com/v1/audio-features/", final.music.dataframe[row, 1]), add_headers(Authorization = paste("Bearer", access_token)))
   track.body <- content(track.data, "text")         
-  track <- data.frame(fromJSON(track.body)) %>% mutate(genre =  music.dataframes[row, 2])
+  track <- data.frame(fromJSON(track.body)) %>% mutate(genre =  final.music.dataframe[row, 2])
   audio.features <- rbind(audio.features, track, stringsAsFactors = FALSE)
 }
 
-classical.averages <- filter(audio.features, genre == "classical") %>% 
-  summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
-            speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
-            liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = "classical")
-
-country.averages <- filter(audio.features, genre == "country") %>% 
-  summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
-            speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
-            liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = "country")
-
-pop.averages <- filter(audio.features, genre == "pop") %>% 
-  summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
-            speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
-            liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = "pop")
-
-rap.averages <- filter(audio.features, genre == "rap") %>% 
-  summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
-            speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
-            liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = "rap")
-
-rock.averages <- filter(audio.features, genre == "rock") %>% 
-  summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
-            speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
-            liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = "rock")
-
-
-
-music.averages <- rbind(classical.averages, country.averages, pop.averages, rap.averages, rock.averages, stringsAsFactors = FALSE)
-
+music.averages <- data.frame()
+for(row in 1:5){
+  
+  temp.averages <- data.frame()
+  
+  if(row == 1){
+    temp.genre <- "classical"
+  }else if(row == 2){
+    temp.genre <- "country"
+  }else if(row == 3){
+    temp.genre <- "pop"
+  }else if(row == 4){
+    temp.genre <- "rap"
+  }else{
+    temp.genre <- "rock"
+  }
+  
+  temp.averages <- filter(audio.features, genre == temp.genre) %>% 
+    summarise(danceability = mean(danceability), energy = mean(energy), key = mean(key), loudness = mean(loudness),
+              speechiness = mean(speechiness), acousticness = mean(acousticness), instrumentalness = mean(instrumentalness),
+              liveness = mean(liveness), valence = mean(valence), tempo = mean(tempo), duration_ms = mean(duration_ms)) %>% mutate(genre = temp.genre)
+  
+  music.averages <- rbind(music.averages, temp.averages, stringsAsFactors = FALSE)
+}
