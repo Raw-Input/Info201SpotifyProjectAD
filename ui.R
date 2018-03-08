@@ -48,7 +48,8 @@ my.ui <- fluidPage(
     mainPanel(
       div(
         plotOutput('plot4')
-      )
+      ),
+      textOutput('section3analysis')
     ),
     sidebarPanel(
       #the options on what to compare, "valence" vs "whatever characteristic"

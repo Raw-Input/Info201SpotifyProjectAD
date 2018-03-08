@@ -118,3 +118,4 @@ high.avg <- summarize(high.valence,danceability=mean(danceability), energy=mean(
 low.avg <- summarize(low.valence,danceability=mean(danceability), energy=mean(energy), loudness=mean(loudness), speechiness=mean(speechiness), acousticness=mean(acousticness), instrumentalness=mean(instrumentalness), liveness=mean(liveness),tempo=mean(tempo), duration=mean(duration_ms))
 write.csv(high.avg, file = "high_avg.csv")
 write.csv(low.avg, file = "low_avg.csv")
+

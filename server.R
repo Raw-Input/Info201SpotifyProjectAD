@@ -94,7 +94,6 @@ my.server <- function (input, output) {
     }
 
   })
-  #liam server code
   #Valence Data Bar Graph
   output$plot4 <- renderPlot({
     option <- tolower(input$select4)
@@ -104,6 +103,13 @@ my.server <- function (input, output) {
       ggplot(data = averages, aes(x = rownames(averages), y = eval(parse(text=option)))) +
       geom_bar(stat = "identity", fill="steelblue") + labs(y = toString(option))
       )
+  })
+  output$section3analysis <- renderText({
+    "This section compares different audio features for songs with a high valence, and those with a low valence. 
+    Valence is the positivity of the song. After selecting a specific audio feature you can see the relationship that valence
+    has.Some features such as Acousticness were nearly identical for both high and low valence. However features such as 
+    Intrumentalness were very different when comparing high and low valence songs."
+    
   })
   
   
