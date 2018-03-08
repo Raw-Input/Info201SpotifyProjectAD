@@ -32,7 +32,21 @@ my.ui <- fluidPage(
                   choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Valence", "Tempo", "Duration_ms"), 
                   selected = "Energy")
     )
+  ),
+  #liam
+  titlePanel("Audio Features vs Valence"),
+  sidebarLayout( 
+    mainPanel(
+      plotOutput('plot2')
+    ),
+    sidebarPanel(
+      #the options on what to compare, "valence" vs "whatever characteristic"
+      selectInput("select", label = h3("Characteristic"), 
+                  choices = list("Danceability", "Energy", "Loudness", "Speechiness", "Acousticness", "Instrumentalness", "Liveness", "Tempo", "Duration")
+      )
+    )
   )
+  
 )
 
 shinyUI(my.ui)

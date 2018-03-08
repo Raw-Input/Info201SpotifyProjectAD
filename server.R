@@ -58,6 +58,17 @@ my.server <- function (input, output) {
     return(ggplot(data = audio.features) + geom_point(mapping = aes_string(x = "genre", y = tolower(input$select3), color = "genre"), size = 5) 
            + labs(title = paste("Specific Values of", input$select3, "for Each Genre")))
   })
+  #liam server code
+  #Valence Data Bar Graph
+  output$plot2 <- renderPlot({
+    option <- tolower(input$select)
+    return(ggplot()+
+             geom_bar(data=high.avg,mapping =  aes(x=option), color='blue') +
+             geom_bar(data=low.avg, mapping = aes(x=option),color='green')
+           
+    )
+  })
+  
   
 }
 

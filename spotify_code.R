@@ -103,3 +103,16 @@ for(row in 1:5){
   
   music.averages <- rbind(music.averages, temp.averages, stringsAsFactors = FALSE)
 }
+#Valence Data Trends
+
+#Does the majority of music on Spotify have a higher or lower valence 
+# What relationships can be found between tracks with a overall high/low valence?
+
+#Average valence of songs #0.47
+average.valence <- summarize(big.frame, average= mean(valence))
+paste(average.valence)
+high.valence <- filter(big.frame, valence >0.75)
+low.valence <- filter(big.frame, valence <0.25)
+high.avg <- summarize(high.valence,danceability=mean(danceability), energy=mean(energy), loudness=mean(loudness), speechiness=mean(speechiness), acousticness=mean(acousticness), instrumentalness=mean(instrumentalness), liveness=mean(liveness),tempo=mean(tempo), duration=mean(duration_ms))
+low.avg <- summarize(low.valence,danceability=mean(danceability), energy=mean(energy), loudness=mean(loudness), speechiness=mean(speechiness), acousticness=mean(acousticness), instrumentalness=mean(instrumentalness), liveness=mean(liveness),tempo=mean(tempo), duration=mean(duration_ms))
+
